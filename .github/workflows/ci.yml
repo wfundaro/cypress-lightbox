@@ -1,36 +1,25 @@
-name: CI
+name: Cypress Tests with installation job
 
 on: [push]
 
 jobs:
-  build:
-
+  install:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [16.x]
-
+    container: cypress/browsers:node12.18.3-chrome87-ff82
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      # Install NPM dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run
+
+      - name: Save build folder
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          if-no-files-found: error
+          path: build
+
+      - name: Cypress install
         uses: cypress-io/github-action@v2
         with:
-          build: npm run build
-          start: npm start
-
-    # - uses: wfundaro/jest-str-calculator@main
-    #   with:
-    #     webhook_id: ${{ secrets.WEBHOOK_ID }}
-    #     webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
-    #     message: "`${{ github.event.issue.user.login }}` created an Issue.\n **${{ github.event.issue.title }}** "
-    # - uses: actions/checkout@master
-    # - name: send custom message with args
-    #   uses: appleboy/discord-action@master
-    #   with:
-    #     webhook_id: ${{ secrets.WEBHOOK_ID }}
-    #     webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
-    #     args: The ${{ github.event_name }} event triggered first step.
+          # Disable running of tests within install job
+          runTests: false
+          build: yarn build
