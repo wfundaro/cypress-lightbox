@@ -55,7 +55,7 @@ describe("LightBox test", () => {
     it('Click on like button',()=>{
         //click on love button
         cy.dataCy("like-button").click(); 
-        cy.dataCy("like-button").should("have.css", "display", "none");       
+        cy.dataCy("like-button").should("have.css", "display", "none");              
       });
 
     it('Check like count overlay and lightbox',()=>{
