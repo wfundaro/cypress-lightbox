@@ -11,6 +11,8 @@ describe("LightBox test", () => {
     // check if lightbox is not display
     // cy.dataCy("content-lightbox").should("have.css", "display", "none");
     cy.dataCy("content-lightbox").should('not.be.visible');
+    // cy.dataCy('overlay-visible').should('not.be.visible');
+    cy.dataCy('overlay-click').trigger('mouseover');
   });
 
   it('Overlay click and lightbox is display', () => {
@@ -92,11 +94,12 @@ describe("LightBox test", () => {
     });
 
     it('Check if find comment = Awesome!',()=>{
-        cy.dataCy("comment-body").should("have.text", "Awesome!");
+        cy.dataCy("comment-body-0").should("have.text", "Awesome!");
     });
 
     it('Check if comment visible',()=>{
         cy.dataCy("content-comments").should("have.css", "display", "flex");
+        cy.dataCy("content-comments").should('be.visible');
     });
 
     it('Click on hide comments',()=>{
@@ -105,6 +108,7 @@ describe("LightBox test", () => {
 
     it('Check if comment hidden',()=>{
         cy.dataCy("content-comments").should("have.css", "display", "none");
+        cy.dataCy("content-comments").should('not.be.visible');
     });
 
     it('check comment count overlay and lightbox',()=>{
@@ -129,7 +133,9 @@ describe("LightBox test", () => {
     });
 
     it('Delete comment 2',()=>{
+        cy.dataCy('comment-body-1').should('have.text',"Awesome2!");
         cy.dataCy("delete-comment").eq(1).click();
+        cy.dataCy('comment-body-1').should('have.text',"Awesome3!");
     });
 
     it('Check comment count after delete = 2',()=>{

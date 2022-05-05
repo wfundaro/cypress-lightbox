@@ -51,6 +51,7 @@
                                 x-transition:leave="transition ease-in duration-200"
                                 x-transition:leave-start="opacity-100"
                                 x-transition:leave-end="opacity-0"
+                                data-cy="overlay-visible"
                         >
                             <!-- Overlay content -->
                             <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 text-white">
@@ -191,8 +192,8 @@
                                 <div class="flex flex-col">
                                     <div class="text-black text-xs" 
                                         style="font-family: Poppins;"
-                                        x-text="comment.body"
-                                        data-cy="comment-body"
+                                        x-text="comment.body"                                        
+                                        :data-cy="`comment-body-${index}`"
                                     >
                                     </div>   
                                     <div class="text-gray-500" 
