@@ -6,9 +6,11 @@ describe("LightBox test", () => {
   });
 
   it('Check Display overlay and lightbox', () => {
-    cy.dataCy("overlay-click").should("not.have.css", "display", "none");
+    // cy.dataCy("overlay-click").should("not.have.css", "display", "none");
+    cy.dataCy("overlay-click").should('be.visible');
     // check if lightbox is not display
-    cy.dataCy("content-lightbox").should("have.css", "display", "none");
+    // cy.dataCy("content-lightbox").should("have.css", "display", "none");
+    cy.dataCy("content-lightbox").should('not.be.visible');
   });
 
   it('Overlay click and lightbox is display', () => {
@@ -16,7 +18,8 @@ describe("LightBox test", () => {
     cy.dataCy("overlay-click").click();
 
     //check if lightbox display is display
-    cy.dataCy("content-lightbox").should("have.css", "display", "flex");
+    // cy.dataCy("content-lightbox").should("have.css", "display", "flex");
+    cy.dataCy("content-lightbox").should('be.visible');
   });
 
   it('Click outside lightbox', () => {
@@ -24,7 +27,8 @@ describe("LightBox test", () => {
     cy.dataCy("lightbox").clickOutside();
 
     //check if lightbox display none
-    cy.dataCy("content-lightbox").should("have.css", "display", "none");
+    // cy.dataCy("content-lightbox").should("have.css", "display", "none");
+    cy.dataCy("content-lightbox").should('not.be.visible');
   });
 
   it('Reopen lightbox',()=>{
